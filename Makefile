@@ -11,6 +11,12 @@ log: ## View sync log
 schedule: ## Setup 4x daily auto-sync
 	powershell -ExecutionPolicy Bypass -File setup_drivesync_scheduler.ps1
 
+cleanup-preview: ## Preview what cleanup would delete from OneDrive (safe, no deletion)
+	powershell -ExecutionPolicy Bypass -File cleanup_onedrive.ps1 -DryRun
+
+cleanup: ## Delete excluded folders/files from OneDrive (irreversible)
+	powershell -ExecutionPolicy Bypass -File cleanup_onedrive.ps1
+
 # =====================================
 # 📚 Documentation & Help
 # =====================================
@@ -23,4 +29,4 @@ help: ## Show this help message
 # =====================================
 # 🧹 Phony Targets
 # =====================================
-.PHONY: sync log schedule help
+.PHONY: sync log schedule cleanup-preview cleanup help
